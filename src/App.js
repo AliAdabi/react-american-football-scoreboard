@@ -1,9 +1,30 @@
 //TODO: STEP 1 - Import the useState hook.
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import BottomRow from "./BottomRow";
 import "./App.css";
 let homeTeam = prompt('Name Home Team')
 let awayTeam = prompt('Name Away Team')
+
+const Timer = () => {
+  const [secondsPassed, setSecondsPassed] = useState(0);
+  const [minutesPassed, setMinutesPassed] = useState(0);
+  const [quarter, setQuarter] = useState(0);
+
+ useEffect(() => {
+
+   if (minutesPassed < 90) {
+      setTimeout(() => setSecondsPassed(secondsPassed + 1), 100)
+     if (secondsPassed === 60) {
+        setSecondsPassed(0);
+        setMinutesPassed(minutesPassed + 1)
+        console.log("1 minute past")
+      }
+      if (minutesPassed % 15 == 0 && minutesPassed <= 91) {
+        setQuarter(quarter + 1)
+      }
+    }
+  })
+}
 
 function App() {
   //TODO: STEP 2 - Establish your applictaion's state with some useState hooks.  You'll need one for the home score and another for the away score.
